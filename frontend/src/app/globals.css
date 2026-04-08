@@ -1,0 +1,86 @@
+@import "tailwindcss";
+
+/* 
+  Tailwind v4 automatically discovers variables in :root starting with --color- 
+  This removes the @theme rule to prevent IDE "Unknown at rule" warnings
+*/
+:root {
+  --background: #000000;
+  --foreground: #f4f4f5;
+  
+  /* Auto-discovered by Tailwind v4 as 'accent', 'surface', and 'border' colors */
+  --color-accent: #fbbf24;
+  --color-surface: #0a0a0a;
+  --color-border: #18181b;
+  
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, -apple-system, sans-serif;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #27272a;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #3f3f46;
+}
+
+/* Glassmorphism utility */
+.glass {
+  background: rgba(10, 10, 10, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.premium-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.premium-card:hover {
+  border-color: #3f3f46;
+  transform: translateY(-4px);
+}
+
+/* Hide scrollbar but keep scrolling */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Touch-friendly links and buttons */
+@media (hover: none) and (pointer: coarse) {
+  button, a {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+/* Responsive typography improvements */
+@media (max-width: 640px) {
+  body {
+    font-size: 14px;
+  }
+}
