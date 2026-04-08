@@ -105,17 +105,9 @@ export default function Header() {
           />
         </Link>
         
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-8">
-          <Link href="/shop" className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 hover:text-white transition-colors">New Arrivals</Link>
-          <Link href="/shop?category=native" className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 hover:text-white transition-colors">Native Wear</Link>
-          <Link href="/shop?category=footwear" className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 hover:text-white transition-colors">Footwear</Link>
-        </nav>
-
-
-        {/* Collections Dropdown (Desktop) */}
+        {/* Collections Dropdown (Desktop) - Repositioned after Logo */}
         <div 
-          className="hidden md:block relative"
+          className="hidden md:block relative ml-8"
           onMouseEnter={() => setIsDropdownOpen(true)}
           onMouseLeave={() => setIsDropdownOpen(false)}
         >
@@ -135,33 +127,53 @@ export default function Header() {
             </svg>
           </button>
 
-          {/* Dropdown Menu */}
+          {/* Mega Menu (3 Columns) */}
           {isDropdownOpen && (
-            <div className="absolute top-full left-0 mt-1 w-56 bg-zinc-950 border border-white/10 rounded-sm shadow-xl overflow-hidden animate-in fade-in slide-in-from-top-2 duration-200 max-h-96 overflow-y-auto">
+            <div className="absolute top-full -left-20 mt-1 w-[800px] bg-zinc-950 border border-white/10 rounded-sm shadow-2xl overflow-hidden animate-in fade-in slide-in-from-top-2 duration-200 z-50 p-8">
+              <div className="mb-6 pb-4 border-b border-white/10 flex justify-between items-end">
+                <h3 className="text-xs font-bold uppercase tracking-widest text-amber-400">Exclusive Collections</h3>
+                <Link href="/shop" onClick={() => setIsDropdownOpen(false)} className="text-[10px] text-zinc-500 hover:text-white uppercase tracking-tighter">View All Pieces</Link>
+              </div>
+              
               {isLoading ? (
-                <div className="px-4 py-6 text-xs text-zinc-500 text-center">
-                  <div className="animate-spin inline-block w-4 h-4 border-2 border-amber-400 border-t-transparent rounded-full mb-2"></div>
-                  <p>Loading...</p>
+                <div className="py-12 text-center">
+                  <div className="animate-spin inline-block w-6 h-6 border-2 border-amber-400 border-t-transparent rounded-full mb-2"></div>
                 </div>
               ) : categories.length > 0 ? (
-                categories.map((category, index) => (
-                  <Link
-                    key={category.slug}
-                    href={`/shop?category=${category.slug}`}
-                    onClick={() => setIsDropdownOpen(false)}
-                    className={`block px-4 py-3 text-xs font-semibold uppercase tracking-wider text-zinc-300 hover:text-amber-400 hover:bg-black/50 transition-colors duration-150 ${
-                      index !== categories.length - 1 ? 'border-b border-white/5' : ''
-                    }`}
-                  >
-                    {category.name}
-                  </Link>
-                ))
+                <div className="grid grid-cols-3 gap-x-12 gap-y-4">
+                  {categories.map((category) => (
+                    <Link
+                      key={category.slug}
+                      href={`/shop?category=${category.slug}`}
+                      onClick={() => setIsDropdownOpen(false)}
+                      className="group flex items-center gap-3 text-[11px] font-semibold uppercase tracking-wider text-zinc-400 hover:text-white transition-colors duration-150"
+                    >
+                      <span className="w-1.5 h-1.5 rounded-full bg-zinc-800 group-hover:bg-amber-400 transition-colors"></span>
+                      {category.name}
+                    </Link>
+                  ))}
+                </div>
               ) : (
-                <div className="px-4 py-3 text-xs text-zinc-500">No categories found</div>
+                <div className="py-6 text-xs text-zinc-500 text-center uppercase tracking-widest">No categories found</div>
               )}
+
+              {/* Featured Footer in Mega Menu */}
+              <div className="mt-10 grid grid-cols-1 gap-4">
+                <div className="bg-white/5 p-4 rounded-sm flex items-center justify-between border border-white/5">
+                  <p className="text-[10px] text-zinc-400 uppercase tracking-widest">New arrivals added weekly</p>
+                  <Link href="/shop" onClick={() => setIsDropdownOpen(false)} className="text-[10px] font-bold text-amber-400 hover:text-amber-300 underline underline-offset-4">Explore New Arrivals</Link>
+                </div>
+              </div>
             </div>
           )}
         </div>
+
+        {/* Desktop Navigation */}
+        <nav className="hidden md:flex items-center gap-8 ml-8">
+          <Link href="/shop" className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 hover:text-white transition-colors">New Arrivals</Link>
+          <Link href="/shop?category=native" className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 hover:text-white transition-colors">Native Wear</Link>
+          <Link href="/shop?category=footwear" className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 hover:text-white transition-colors">Footwear</Link>
+        </nav>
 
         {/* CTA Buttons and Icons */}
         <div className="flex items-center gap-2 sm:gap-3 md:gap-6">
