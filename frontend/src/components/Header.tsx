@@ -178,8 +178,8 @@ export default function Header() {
         {/* CTA Buttons and Icons */}
         <div className="flex items-center gap-2 sm:gap-3 md:gap-6">
           {/* Search Section */}
-          <div className="flex-1 max-w-2xl mx-10 hidden lg:block relative">
-            <div className="flex items-center bg-white/5 border border-white/10 rounded-full px-4 py-2 hover:bg-white/10 focus-within:bg-white/10 focus-within:border-amber-400/50 transition-all duration-300">
+          <div className="flex-1 max-w-3xl mx-6 hidden lg:block relative">
+            <div className="flex items-center bg-white/5 border border-white/10 rounded-full px-6 py-3 hover:bg-white/10 focus-within:bg-white/10 focus-within:border-amber-400/50 transition-all duration-300">
               <svg className="w-4 h-4 text-zinc-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
               </svg>
