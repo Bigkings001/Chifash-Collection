@@ -179,14 +179,14 @@ export default function Header() {
           {/* Search Section */}
           <div className="relative flex items-center">
             {isSearchOpen && (
-              <div className="absolute right-0 top-1/2 -translate-y-1/2 flex items-center bg-zinc-900 border border-white/10 rounded-full px-4 py-1.5 w-64 sm:w-80 md:w-96 animate-in fade-in slide-in-from-right-4 duration-300 z-50">
+              <div className="absolute right-0 top-1/2 -translate-y-1/2 flex items-center bg-zinc-900 border border-white/20 rounded-full px-6 py-2.5 w-72 sm:w-96 md:w-[450px] lg:w-[550px] animate-in fade-in slide-in-from-right-8 duration-500 z-50 ring-1 ring-white/10 shadow-2xl">
                 <input
                   ref={searchInputRef}
                   type="text"
-                  placeholder="Search collections..."
+                  placeholder="Search our exclusive collections..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="bg-transparent text-white text-xs w-full focus:outline-none placeholder:text-zinc-500"
+                  className="bg-transparent text-white text-[13px] w-full focus:outline-none placeholder:text-zinc-500 font-medium"
                 />
                 <button 
                   onClick={() => { setIsSearchOpen(false); setSearchQuery(''); }}
