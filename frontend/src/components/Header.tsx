@@ -5,6 +5,7 @@ import Image from 'next/image'
 import { useState, useEffect, useRef } from 'react'
 import CartDrawer from './CartDrawer'
 import { Product } from '@/types/product'
+import { getFullImageUrl } from '@/lib/api'
 
 interface Category {
   id: number
@@ -29,7 +30,8 @@ export default function Header() {
     const fetchCategories = async () => {
       try {
         setIsLoading(true)
-        const response = await fetch('http://127.0.0.1:8000/api/products/categories/', {
+        const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api'
+        const response = await fetch(`${baseUrl}/products/categories/`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -62,7 +64,8 @@ export default function Header() {
     const delayDebounceFn = setTimeout(async () => {
       try {
         setIsSearching(true)
-        const response = await fetch(`http://127.0.0.1:8000/api/products/?search=${encodeURIComponent(searchQuery)}`)
+        const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api'
+        const response = await fetch(`${baseUrl}/products/?search=${encodeURIComponent(searchQuery)}`)
         if (response.ok) {
           const data = await response.json()
           setSearchResults(Array.isArray(data) ? data.slice(0, 5) : (data.results?.slice(0, 5) || []))
@@ -213,7 +216,7 @@ export default function Header() {
                           >
                             <div className="relative w-10 h-10 rounded-xs overflow-hidden bg-zinc-900 flex-shrink-0">
                               {product.primary_image && (
-                                <Image src={product.primary_image} alt={product.name} fill className="object-cover" />
+                                <Image src={getFullImageUrl(product.primary_image) || ''} alt={product.name} fill className="object-cover" />
                               )}
                             </div>
                             <div className="flex-1 min-w-0">

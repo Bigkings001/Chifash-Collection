@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import Image from 'next/image'
 import { ProductImage } from '@/types/product'
+import { getFullImageUrl } from '@/lib/api'
 
 interface ProductGalleryProps {
   images?: ProductImage[]
@@ -11,7 +12,10 @@ interface ProductGalleryProps {
 
 export default function ProductGallery({ images = [], name }: ProductGalleryProps) {
   // Helper to get URL from ProductImage object
-  const getUrl = (img: ProductImage) => img.image_url || img.image || ''
+  const getUrl = (img: ProductImage) => {
+    const rawUrl = img.image_url || img.image || ''
+    return getFullImageUrl(rawUrl) || ''
+  }
 
   const [mainImage, setMainImage] = useState(
     getUrl(images.find(img => img.is_primary) || images[0] || { id: 0, image: '', image_url: '', is_primary: false })

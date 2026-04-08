@@ -4,6 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Product } from '@/types/product'
 import { useState } from 'react'
+import { getFullImageUrl } from '@/lib/api'
 
 interface ProductCardProps {
   product: Product
@@ -57,7 +58,7 @@ export default function ProductCard({ product, isLoading = false }: ProductCardP
           {product.primary_image ? (
             <>
               <Image
-                src={product.primary_image}
+                src={getFullImageUrl(product.primary_image) || ''}
                 alt={product.name}
                 fill
                 sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"

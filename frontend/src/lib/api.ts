@@ -1,4 +1,12 @@
 const API_URL = process.env.NEXT_PUBLIC_API_URL
+const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:8000'
+
+export function getFullImageUrl(path: string | null) {
+  if (!path) return null
+  if (path.startsWith('http')) return path
+  const cleanPath = path.startsWith('/') ? path : `/${path}`
+  return `${BACKEND_URL}${cleanPath}`
+}
 
 export async function getProducts(params?: { category?: string; featured?: boolean }) {
   const query = new URLSearchParams()
